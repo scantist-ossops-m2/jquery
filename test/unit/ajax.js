@@ -65,21 +65,6 @@ module( "ajax", {
 		}
 	});
 
-	ajaxTest( "jQuery.ajax() - do not execute js (crossOrigin)", 2, function( assert ) {
-		return {
-			create: function( options ) {
-				options.crossDomain = true;
-				return jQuery.ajax( url( "data/script.php?header=ecma" ), options );
-			},
-			success: function() {
-				assert.ok( true, "success" );
-			},
-			complete: function() {
-				assert.ok( true, "complete" );
-			}
-		};
-	} );
-
 	ajaxTest( "jQuery.ajax() - execute js for crossOrigin when dataType option is provided", 3,
 		function( assert ) {
 			return {
@@ -106,6 +91,11 @@ module( "ajax", {
 			},
 			success: function() {
 				assert.ok( true, "success" );
+			},
+			fail: function() {
+				if (jQuery.support.cors === false) {
+					assert.ok( true, "fail" );
+				}
 			},
 			complete: function() {
 				assert.ok( true, "complete" );
