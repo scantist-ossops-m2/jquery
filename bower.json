@@ -1,6 +1,6 @@
 {
   "name": "jquery",
-  "version": "2.1.4",
+  "version": "2.1.4-sysdig-patch",
   "main": "dist/jquery.js",
   "license": "MIT",
   "ignore": [
