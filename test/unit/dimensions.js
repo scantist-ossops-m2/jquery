@@ -342,7 +342,7 @@ QUnit.test( "getting dimensions shouldn't modify runtimeStyle see #9233", functi
 QUnit.test( "table dimensions", function( assert ) {
 	assert.expect( 2 );
 
-	var table = jQuery( "<table><colgroup><col/><col/></colgroup><tbody><tr><td></td><td>a</td></tr><tr><td></td><td>a</td></tr></tbody></table>" ).appendTo( "#qunit-fixture" ),
+	var table = jQuery( "<table><colgroup><col></col><col></col></colgroup><tbody><tr><td></td><td>a</td></tr><tr><td></td><td>a</td></tr></tbody></table>" ).appendTo( "#qunit-fixture" ),
 		tdElem = table.find( "td" ).first(),
 		colElem = table.find( "col" ).first().width( 300 );
 
@@ -476,7 +476,7 @@ QUnit.test( "allow modification of coordinates argument (gh-1848)", function( as
 	assert.expect( 1 );
 
 	var offsetTop,
-		element = jQuery( "<div/>" ).appendTo( "#qunit-fixture" );
+		element = jQuery( "<div></div>" ).appendTo( "#qunit-fixture" );
 
 	element.offset( function( index, coords ) {
 		coords.top = 100;
@@ -523,7 +523,7 @@ QUnit.test( "width/height on element with transform (gh-3193)", function( assert
 
 	assert.expect( 2 );
 
-	var $elem = jQuery( "<div style='width: 200px; height: 200px; transform: scale(2);' />" )
+	var $elem = jQuery( "<div style='width: 200px; height: 200px; transform: scale(2);'></div>" )
 		.appendTo( "#qunit-fixture" );
 
 	assert.equal( $elem.width(), 200, "Width ignores transforms" );
@@ -596,14 +596,14 @@ QUnit.test( "interaction with scrollbars (gh-3589)", function( assert ) {
 				return old + adjustment;
 			};
 		},
-		parent = jQuery( "<div/>" )
+		parent = jQuery( "<div></div>" )
 			.css( { position: "absolute", width: "1000px", height: "1000px" } )
 			.appendTo( "#qunit-fixture" ),
 		fraction = jQuery( "<div style='width:4.5px;'/>" ).appendTo( parent ).width() % 1,
 		borderWidth = 1,
 		padding = 2,
 		size = 100 + fraction,
-		plainBox = jQuery( "<div />" )
+		plainBox = jQuery( "<div></div>" )
 			.css( {
 				"box-sizing": "content-box",
 				position: "absolute",

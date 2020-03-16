@@ -2353,8 +2353,8 @@ if ( typeof window.ArrayBuffer === "undefined" || typeof new XMLHttpRequest().re
 		var done = assert.async();
 
 		addGlobalEvents( "ajaxStart ajaxStop ajaxSend ajaxComplete ajaxError", assert )();
-		jQuery( document ).ajaxStop( done );
-		jQuery( "<div/>" ).load( baseURL + "404.txt", function() {
+		jQuery( document ).on( "ajaxStop", done );
+		jQuery( "<div></div>" ).load( baseURL + "404.txt", function() {
 			assert.ok( true, "complete" );
 		} );
 	} );
@@ -2447,15 +2447,17 @@ if ( typeof window.ArrayBuffer === "undefined" || typeof new XMLHttpRequest().re
 				return "Hello World";
 			}
 		} );
-		jQuery( "<div/>" ).load( url( "name.html" ), function( responseText ) {
+		jQuery( "<div></div>" ).load( url( "name.html" ), function( responseText ) {
 			assert.strictEqual( jQuery( this ).html(), "Hello World", "Test div was filled with filtered data" );
 			assert.strictEqual( responseText, "Hello World", "Test callback receives filtered data" );
 			QUnit.start();
 		} );
 	} );
 
-	QUnit.asyncTest( "jQuery.fn.load( String, Object, Function )", 2, function( assert ) {
-		jQuery( "<div />" ).load( url( "mock.php?action=echoHtml" ), {
+	QUnit.test( "jQuery.fn.load( String, Object, Function )", function( assert ) {
+		assert.expect( 2 );
+		var done = assert.async();
+		jQuery( "<div></div>" ).load( url( "mock.php?action=echoHtml" ), {
 			"bar": "ok"
 		}, function() {
 			var $node = jQuery( this );
@@ -2468,7 +2470,7 @@ if ( typeof window.ArrayBuffer === "undefined" || typeof new XMLHttpRequest().re
 	QUnit.test( "jQuery.fn.load( String, String, Function )", 2, function( assert ) {
 		var done = assert.async();
 
-		jQuery( "<div />" ).load( url( "mock.php?action=echoHtml" ), "foo=3&bar=ok", function() {
+		jQuery( "<div></div>" ).load( url( "mock.php?action=echoHtml" ), "foo=3&bar=ok", function() {
 			var $node = jQuery( this );
 			assert.strictEqual( $node.find( "#method" ).text(), "GET", "Check method" );
 			assert.ok( $node.find( "#query" ).text().match( /foo=3&bar=ok/ ), "Check if a string of data is passed correctly" );
