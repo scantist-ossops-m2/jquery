@@ -2,7 +2,7 @@
   "name": "@sysdig/jquery",
   "title": "jQuery",
   "description": "JavaScript library for DOM operations",
-  "version": "2.2.5-sysdig-patch-pr3-3",
+  "version": "2.2.5-sysdig-patch",
   "main": "dist/jquery.js",
   "homepage": "http://jquery.com",
   "author": {
